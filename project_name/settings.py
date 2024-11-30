@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STRIPE_SECRET_KEY = 'sk_test_51QKuplIRkjqZiung9OFX57WcW85t2KxAKg8hFr7SicihgpGrFGCBE2GcvSjyToQx35fX1F5yaRRhXIocaVRToRJz00ZQaF0Dp0'
+
 
 # Application definition
 
@@ -40,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "app_name",
     "users",
-    "cursos"
+    "cursos",
+    'stripe_payments',
+
 ]
 
 MIDDLEWARE = [
@@ -77,6 +82,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 WSGI_APPLICATION = 'project_name.wsgi.application'
+
+
+# Configuración del correo
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
 
 
 # Database

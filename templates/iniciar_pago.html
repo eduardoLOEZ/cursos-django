@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Comprar {{ curso.titulo }}</title>
+	</head>
+	<body>
+		<h1>Comprar {{ curso.titulo }}</h1>
+		<p>Precio: ${{ curso.precio }}</p>
+		<form method="post">
+			{% csrf_token %}
+			<button type="submit">Proceder al Pago</button>
+		</form>
+	</body>
+</html>

@@ -30,6 +30,7 @@ urlpatterns = [
     path('profile/', user_profile, name='user_profile'),
     path('profile/upload-picture/', upload_profile_picture, name='upload_profile_picture'),
     path('cursos/', include('cursos.urls')),  # Incluir las rutas de la app "cursos"
+    path('stripe/', include('stripe_payments.urls')),
 
 
 

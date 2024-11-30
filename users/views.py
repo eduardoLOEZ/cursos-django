@@ -118,4 +118,13 @@ def contacto(request):
 @login_required
 def user_profile(request):
     user = request.user  # Obtiene al usuario autenticado
-    return render(request, 'profile.html')
+    cursos_comprados = user.cursos_comprados.all()  # Obtiene los cursos comprados
+
+    # Transformar las URLs a formato embebible
+    for curso in cursos_comprados:
+        if curso.enlace_video.startswith("https://www.youtube.com/watch?v="):
+            video_id = curso.enlace_video.split('=')[1]
+            curso.enlace_video = f"https://www.youtube.com/embed/{video_id}"
+
+    return render(request, 'profile.html', {'user': user, 'cursos_comprados': cursos_comprados})
+

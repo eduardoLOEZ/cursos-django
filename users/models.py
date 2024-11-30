@@ -35,6 +35,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=128, verbose_name="Contraseña")
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='default_profile.png')
 
+    # Relación con los cursos comprados
+    cursos_comprados = models.ManyToManyField(
+        'cursos.Curso', blank=True, related_name='usuarios', verbose_name="Cursos Comprados"
+    )
     
     # Rol (estudiante o administrador)
     ROLE_CHOICES = [

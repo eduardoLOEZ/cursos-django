@@ -1,49 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ curso.titulo }} - Detalles</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 font-sans">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{{ curso.titulo }} - Detalles</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="bg-gray-100 font-sans">
+		<!-- Header -->
+		<header class="bg-white shadow">
+			<nav
+				class="container mx-auto flex justify-between items-center py-4 px-6"
+			>
+				<div class="logo text-blue-600 text-2xl font-bold">
+					<h1>MONALIZA</h1>
+				</div>
+				<ul class="flex space-x-6">
+					<li>
+						<a href="/" class="text-gray-600 hover:text-blue-600">Inicio</a>
+					</li>
+					<li>
+						<a href="/cursos/" class="text-gray-600 hover:text-blue-600"
+							>Cursos</a
+						>
+					</li>
+					<li>
+						<a href="/contacto/" class="text-gray-600 hover:text-blue-600"
+							>Contacto</a
+						>
+					</li>
+					<li>
+						<a
+							href="/users/logout/"
+							class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+							>Cerrar Sesión</a
+						>
+					</li>
+				</ul>
+			</nav>
+		</header>
 
-    <!-- Header -->
-    <header class="bg-white shadow">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-6">
-            <div class="logo text-blue-600 text-2xl font-bold">
-                <h1>MONALIZA</h1>
-            </div>
-            <ul class="flex space-x-6">
-                <li><a href="/" class="text-gray-600 hover:text-blue-600">Inicio</a></li>
-                <li><a href="/cursos/" class="text-gray-600 hover:text-blue-600">Cursos</a></li>
-                <li><a href="/contacto/" class="text-gray-600 hover:text-blue-600">Contacto</a></li>
-                <li><a href="/profile/" class="text-gray-600 hover:text-blue-600">Perfil</a></li>
-                <li><a href="/users/logout/" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </header>
+		<!-- Course Details Section -->
+		<section class="py-16">
+			<div class="container mx-auto max-w-4xl bg-white shadow rounded-lg p-8">
+				<h2 class="text-3xl font-bold mb-4">{{ curso.titulo }}</h2>
+				<img
+					src="{{ curso.imagen_portada.url }}"
+					alt="{{ curso.titulo }}"
+					class="w-full h-80 object-cover rounded mb-6"
+				/>
+				<p class="text-gray-600 mb-6">{{ curso.descripcion }}</p>
+				<p class="text-2xl font-bold text-blue-600 mb-6">
+					Precio: ${{ curso.precio }}
+				</p>
 
-    <!-- Course Details Section -->
-    <section class="py-16">
-        <div class="container mx-auto max-w-4xl bg-white shadow rounded-lg p-8">
-            <h2 class="text-3xl font-bold mb-4">{{ curso.titulo }}</h2>
-            <img src="{{ curso.imagen_portada.url }}" alt="{{ curso.titulo }}" class="w-full h-80 object-cover rounded mb-6">
-            <p class="text-gray-600 mb-6">{{ curso.descripcion }}</p>
-            <p class="text-2xl font-bold text-blue-600 mb-6">Precio: ${{ curso.precio }}</p>
-            <a href="#" class="bg-green-600 text-white px-6 py-3 rounded font-bold hover:bg-green-700 inline-block">Comprar con Stripe</a>
-            <div class="aspect-w-16 aspect-h-9 mt-8">
-                <iframe src="{{ curso.enlace_video }}" frameborder="0" allowfullscreen class="w-full h-96 rounded-lg"></iframe>
-            </div>
-        </div>
-    </section>
+				{% if is_purchased %}
+				<!-- Mostrar video si se ha comprado -->
+				<div class="aspect-w-16 aspect-h-9 mt-8">
+					<iframe
+						src="{{ curso.enlace_video }}"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					>
+					</iframe>
+				</div>
+				{% else %}
+				<!-- Mensaje para cursos no comprados -->
+				<p class="text-red-600 font-bold mb-4">
+					Para poder tener acceso al video del curso, tienes que comprarlo.
+				</p>
+				<form action="{% url 'iniciar_pago' curso.id %}" method="POST">
+					{% csrf_token %}
+					<button
+						type="submit"
+						class="bg-green-600 text-white px-6 py-3 rounded font-bold hover:bg-green-700 inline-block"
+					>
+						Comprar
+					</button>
+				</form>
+				{% endif %}
+			</div>
+		</section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-4">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 MONALIZA. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-</body>
+		<footer class="bg-gray-800 text-white py-4">
+			<div class="container mx-auto text-center">
+				<p>&copy; 2024 MONALIZA. Todos los derechos reservados.</p>
+			</div>
+		</footer>
+	</body>
 </html>

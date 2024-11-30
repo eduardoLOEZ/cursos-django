@@ -1,86 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 font-sans">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Perfil de Usuario</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="bg-gray-100 font-sans">
+		<!-- Header -->
+		<header class="bg-white shadow">
+			<nav
+				class="container mx-auto flex justify-between items-center py-4 px-6"
+			>
+				<div class="logo text-blue-600 text-2xl font-bold">
+					<h1>MONALIZA</h1>
+				</div>
+				<ul class="flex space-x-6">
+					<li>
+						<a href="/" class="text-gray-600 hover:text-blue-600">Inicio</a>
+					</li>
+					<li>
+						<a
+							href="/users/logout/"
+							class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+							>Cerrar Sesión</a
+						>
+					</li>
+				</ul>
+			</nav>
+		</header>
 
-    <!-- Header -->
-    <header class="bg-white shadow">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-6">
-            <div class="logo text-blue-600 text-2xl font-bold">
-                <h1>MONALIZA</h1>
-            </div>
-            <ul class="flex space-x-6">
-                <li><a href="/" class="text-gray-600 hover:text-blue-600">Inicio</a></li>
-                <li><a href="/users/logout/" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </header>
+		<!-- Profile Section -->
+		<section class="py-16">
+			<div class="container mx-auto max-w-4xl bg-white shadow rounded-lg p-8">
+				<div class="flex items-center space-x-6">
+					<!-- Foto de perfil -->
+					<div class="relative w-32 h-32">
+						<img
+							id="profile-picture"
+							src="{{ user.profile_picture.url }}"
+							alt="Foto de perfil"
+							class="w-full h-full rounded-full object-cover"
+						/>
+						<!-- Botón para subir nueva imagen -->
+						<input
+							id="upload-input"
+							type="file"
+							accept="image/*"
+							class="absolute inset-0 opacity-0 cursor-pointer"
+						/>
+					</div>
+					<!-- Información del usuario -->
+					<div>
+						<h2 class="text-3xl font-bold">
+							{{ user.first_name }} {{ user.last_name }}
+						</h2>
+						<p class="text-gray-600">{{ user.email }}</p>
+						<p class="text-gray-600">
+							Usuario desde: {{ user.date_joined|date:"d M Y" }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- Profile Section -->
-    <section class="py-16">
-        <div class="container mx-auto max-w-4xl bg-white shadow rounded-lg p-8">
-            <div class="flex items-center space-x-6">
-                <!-- Foto de perfil -->
-                <div class="relative w-32 h-32">
-                    <img id="profile-picture" src="{{ user.profile_picture.url }}" alt="Foto de perfil" class="w-full h-full rounded-full object-cover">
-                    <!-- Botón para subir nueva imagen -->
-                    <input id="upload-input" type="file" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer">
-                </div>
-                <!-- Información del usuario -->
-                <div>
-                    <h2 class="text-3xl font-bold">{{ user.first_name }} {{ user.last_name }}</h2>
-                    <p class="text-gray-600">{{ user.email }}</p>
-                    <p class="text-gray-600">Usuario desde: {{ user.date_joined|date:"d M Y" }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
+		<!-- Cursos Comprados -->
+		<section class="py-16">
+			<div class="container mx-auto max-w-4xl bg-white shadow rounded-lg p-8">
+				<h2 class="text-2xl font-bold mb-6">Mis Cursos</h2>
+				{% if cursos_comprados %}
+				<ul>
+					{% for curso in cursos_comprados %}
+					<li class="mb-6">
+						<h3 class="text-xl font-bold">{{ curso.titulo }}</h3>
+						<p class="text-gray-600">{{ curso.descripcion }}</p>
+						<div class="mt-4">
+							<a
+								href="{% url 'eliminar_curso' curso.id %}"
+								class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+							>
+								Eliminar Curso
+							</a>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+				{% else %}
+				<p class="text-gray-600">No tienes cursos comprados aún.</p>
+				{% endif %}
+			</div>
+		</section>
 
-    <footer class="bg-gray-800 text-white py-4">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 MONALIZA. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+		<footer class="bg-gray-800 text-white py-4">
+			<div class="container mx-auto text-center">
+				<p>&copy; 2024 MONALIZA. Todos los derechos reservados.</p>
+			</div>
+		</footer>
 
-    <script>
-        const uploadInput = document.getElementById('upload-input');
-        const profilePicture = document.getElementById('profile-picture');
+		<script>
+			const uploadInput = document.getElementById("upload-input");
+			const profilePicture = document.getElementById("profile-picture");
 
-        uploadInput.addEventListener('change', async (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const formData = new FormData();
-                formData.append('profile_picture', file);
+			uploadInput.addEventListener("change", async (event) => {
+				const file = event.target.files[0];
+				if (file) {
+					const formData = new FormData();
+					formData.append("profile_picture", file);
 
-                try {
-                    const response = await fetch('/profile/upload-picture/', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}',
-                        }
-                    });
+					try {
+						const response = await fetch("/profile/upload-picture/", {
+							method: "POST",
+							body: formData,
+							headers: {
+								"X-CSRFToken": "{{ csrf_token }}",
+							},
+						});
 
-                    const data = await response.json();
-                    if (response.ok) {
-                        alert(data.message);
-                        // Actualiza la imagen en el frontend
-                        profilePicture.src = URL.createObjectURL(file);
-                    } else {
-                        alert(data.error || 'Error al subir la imagen.');
-                    }
-                } catch (error) {
-                    console.error('Error al subir la imagen:', error);
-                    alert('Error al subir la imagen.');
-                }
-            }
-        });
-    </script>
-
-</body>
+						const data = await response.json();
+						if (response.ok) {
+							alert(data.message);
+							// Actualiza la imagen en el frontend
+							profilePicture.src = URL.createObjectURL(file);
+						} else {
+							alert(data.error || "Error al subir la imagen.");
+						}
+					} catch (error) {
+						console.error("Error al subir la imagen:", error);
+						alert("Error al subir la imagen.");
+					}
+				}
+			});
+		</script>
+	</body>
 </html>

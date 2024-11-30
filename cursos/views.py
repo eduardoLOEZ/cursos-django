@@ -8,6 +8,16 @@ def listar_cursos(request):
 
 
 
+
 def detalle_curso(request, curso_id):
-    curso = get_object_or_404(Curso, id=curso_id)  # Obtener el curso o devolver 404
-    return render(request, 'detalle_curso.html', {'curso': curso})
+    curso = get_object_or_404(Curso, id=curso_id)
+    is_purchased = curso in request.user.cursos_comprados.all()
+    
+    # Transformar URL al formato embebible si es necesario
+    if curso.enlace_video.startswith("https://www.youtube.com/watch?v="):
+        video_id = curso.enlace_video.split('=')[1]
+        curso.enlace_video = f"https://www.youtube.com/embed/{video_id}"
+
+    return render(request, 'detalle_curso.html', {'curso': curso, 'is_purchased': is_purchased})
+
+
