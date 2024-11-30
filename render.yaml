@@ -19,7 +19,10 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: STRIPE_SECRET_KEY
+        generateValue: true
       - key: EMAIL_HOST_USER
+        generateValue: true
       - key: EMAIL_HOST_PASSWORD
+        generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
