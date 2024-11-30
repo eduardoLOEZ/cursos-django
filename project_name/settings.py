@@ -61,7 +61,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'users.middlewares.LoginRequiredMiddleware',
 ]
+
+LOGIN_URL = '/users/login/'  # Cambia la URL al path de tu vista de inicio de sesión
+
 
 ROOT_URLCONF = 'project_name.urls'
 
