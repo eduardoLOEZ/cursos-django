@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONALIZA - Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+            <div class="logo text-blue-600 text-2xl font-bold">
+                <h1>MONALIZA</h1>
+            </div>
+            <ul class="flex space-x-6">
+                <li><a href="/" class="text-gray-600 hover:text-blue-600">Inicio</a></li>
+                <li><a href="/cursos/" class="text-gray-600 hover:text-blue-600">Cursos</a></li>
+                <li><a href="/contacto/" class="text-gray-600 hover:text-blue-600">Contacto</a></li>
+                <li><a href="/profile/" class="text-gray-600 hover:text-blue-600">Perfil</a></li>
+                <li><a href="/users/logout/" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-16">
+        <div class="container mx-auto text-center">
+            {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                        <div class="bg-green-100 text-green-600 px-4 py-2 rounded shadow mb-2 inline-block">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <h2 class="text-4xl font-bold mb-4">¡Bienvenido, {{ user.first_name }}!</h2>
+            <p class="text-lg mb-6">Estamos encantados de verte de nuevo. Explora nuestros cursos y encuentra el aprendizaje que necesitas.</p>
+            <a href="/cursos/" class="bg-white text-blue-600 px-6 py-3 rounded font-bold hover:bg-gray-200">Ver Cursos</a>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="py-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Tus Cursos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Course Card 1 -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Curso de Programación</h3>
+                    <p class="text-gray-600 mb-6">Aprende los fundamentos de la programación.</p>
+                    <a href="/cursos/programacion/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Continuar</a>
+                </div>
+                <!-- Course Card 2 -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Curso de Diseño Web</h3>
+                    <p class="text-gray-600 mb-6">Domina las técnicas de diseño web moderno.</p>
+                    <a href="/cursos/diseno-web/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Continuar</a>
+                </div>
+                <!-- Course Card 3 -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Curso de Electrónica</h3>
+                    <p class="text-gray-600 mb-6">Aprende sobre los componentes, circuitos y leyes.</p>
+                    <a href="/cursos/electronica/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Continuar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Cursos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for curso in cursos %}
+                <div class="bg-white shadow rounded-lg p-6">
+                    <img src="{{ curso.imagen_portada.url }}" alt="{{ curso.titulo }}" class="w-full h-40 object-cover rounded mb-4">
+                    <h3 class="text-xl font-bold mb-4">{{ curso.titulo }}</h3>
+                    <p class="text-gray-600 mb-6">{{ curso.descripcion }}</p>
+                    <a href="/cursos/{{ curso.id }}/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ver Curso</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 MONALIZA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
