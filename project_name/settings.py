@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-q!hf(#7^f*tysk=00klhhh-q4-vm@#n17*lp0g^e_vlrtj7d%e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['monaliza-app.onrender.com', 'localhost', '127.0.0.1']
 
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
 
