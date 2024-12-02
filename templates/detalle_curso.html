@@ -54,6 +54,30 @@
 					Precio: ${{ curso.precio }}
 				</p>
 
+				<!-- templates/cursos/detalle_curso.html -->
+				<section class="py-8">
+					<h3 class="text-xl font-bold mb-4">Materiales del curso</h3>
+					{% if user.is_authenticated and curso in user.cursos_comprados.all %}
+					<ul class="list-disc pl-6">
+						{% for pdf in curso.pdfs.all %}
+						<li>
+							<a
+								href="{{ pdf.archivo.url }}"
+								target="_blank"
+								class="text-blue-600 hover:underline"
+							>
+								{{ pdf.titulo }}
+							</a>
+						</li>
+						{% endfor %}
+					</ul>
+					{% else %}
+					<p class="text-gray-600">
+						Debes comprar este curso para acceder a los materiales.
+					</p>
+					{% endif %}
+				</section>
+
 				{% if is_purchased %}
 				<!-- Mostrar video si se ha comprado -->
 				<div class="aspect-w-16 aspect-h-9 mt-8">
