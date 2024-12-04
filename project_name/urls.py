@@ -31,12 +31,8 @@ urlpatterns = [
     path('profile/upload-picture/', upload_profile_picture, name='upload_profile_picture'),
     path('cursos/', include('cursos.urls')),  # Incluir las rutas de la app "cursos"
     path('stripe/', include('stripe_payments.urls')),
-
-
-
-
-
-
+    path('cursos/', include(('cursos.urls', 'cursos'), namespace='cursos')),
+    path('cuestionarios/', include(('cuestionarios.urls', 'cuestionarios'), namespace='cuestionarios')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

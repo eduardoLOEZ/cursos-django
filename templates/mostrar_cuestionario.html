@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Examen: Tipos de Datos en la Programación</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="bg-gray-100 text-gray-800 font-sans">
+		<div class="container mx-auto py-10 px-6">
+			<h1 class="text-3xl font-bold text-center text-blue-600 mb-10">
+				Examen: Tipos de Datos en la Programación
+			</h1>
+
+			<form id="examForm" class="space-y-8">
+				<!-- Pregunta 1 -->
+				<div class="bg-white shadow-md rounded-lg p-6">
+					<h2 class="text-lg font-semibold mb-4">
+						1. ¿Cuál de las siguientes opciones describe correctamente el uso de
+						un tipo de dato booleano (bool)?
+					</h2>
+					<label class="block mb-2">
+						<input type="radio" name="q1" value="wrong" class="mr-2" />
+						a) Es como un vaso que solo puede contener números enteros, como 1,
+						2, o 3.
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q1" value="correct" class="mr-2" />
+						b) Es como un interruptor que solo puede estar en dos estados:
+						encendido (true) o apagado (false).
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q1" value="wrong" class="mr-2" />
+						c) Es como un tazón que puede contener palabras o frases, como
+						"Hola" o "Fiesta".
+					</label>
+					<label class="block">
+						<input type="radio" name="q1" value="wrong" class="mr-2" />
+						d) Es como un vaso que puede contener números con decimales, como
+						3.14 litros de jugo.
+					</label>
+				</div>
+				<!-- Pregunta 2 -->
+				<div class="bg-white shadow-md rounded-lg p-6">
+					<h2 class="text-lg font-semibold mb-4">
+						2. ¿Cuál de los siguientes tipos de datos sería el más adecuado para
+						almacenar el valor 3.14?
+					</h2>
+					<label class="block mb-2">
+						<input type="radio" name="q2" value="wrong" class="mr-2" />
+						a) Enteros (int)
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q2" value="correct" class="mr-2" />
+						b) Flotantes (float)
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q2" value="wrong" class="mr-2" />
+						c) Cadenas de texto (string)
+					</label>
+					<label class="block">
+						<input type="radio" name="q2" value="wrong" class="mr-2" />
+						d) Booleanos (bool)
+					</label>
+				</div>
+				<!-- Pregunta 3 -->
+				<div class="bg-white shadow-md rounded-lg p-6">
+					<h2 class="text-lg font-semibold mb-4">
+						3. ¿Qué tipo de dato sería más adecuado para almacenar la palabra
+						"Programación"?
+					</h2>
+					<label class="block mb-2">
+						<input type="radio" name="q3" value="wrong" class="mr-2" />
+						a) Enteros (int)
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q3" value="wrong" class="mr-2" />
+						b) Flotantes (float)
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q3" value="correct" class="mr-2" />
+						c) Cadenas de texto (string)
+					</label>
+					<label class="block">
+						<input type="radio" name="q3" value="wrong" class="mr-2" />
+						d) Booleanos (bool)
+					</label>
+				</div>
+				<!-- Agrega las demás preguntas aquí usando el mismo formato -->
+				<!-- Pregunta 4 -->
+				<div class="bg-white shadow-md rounded-lg p-6">
+					<h2 class="text-lg font-semibold mb-4">
+						4. ¿Cuál de los siguientes tipos de datos no puede contener
+						decimales?
+					</h2>
+					<label class="block mb-2">
+						<input type="radio" name="q4" value="wrong" class="mr-2" />
+						a) Flotantes (float)
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q4" value="correct" class="mr-2" />
+						b) Enteros (int)
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q4" value="wrong" class="mr-2" />
+						c) Cadenas de texto (string)
+					</label>
+					<label class="block">
+						<input type="radio" name="q4" value="wrong" class="mr-2" />
+						d) Booleanos (bool)
+					</label>
+				</div>
+				<!-- Pregunta 5 -->
+				<div class="bg-white shadow-md rounded-lg p-6">
+					<h2 class="text-lg font-semibold mb-4">
+						5. ¿Cuál de los siguientes ejemplos representa correctamente un dato
+						booleano (bool)?
+					</h2>
+					<label class="block mb-2">
+						<input type="radio" name="q5" value="wrong" class="mr-2" />
+						a) "Encendido"
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q5" value="wrong" class="mr-2" />
+						b) 42
+					</label>
+					<label class="block mb-2">
+						<input type="radio" name="q5" value="correct" class="mr-2" />
+						c) true
+					</label>
+					<label class="block">
+						<input type="radio" name="q5" value="wrong" class="mr-2" />
+						d) 3.14
+					</label>
+				</div>
+
+				<!-- Agrega las preguntas restantes (6 a 10) con el mismo formato -->
+
+				<button
+					type="button"
+					onclick="calculateScore()"
+					class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700"
+				>
+					Enviar Examen
+				</button>
+			</form>
+
+			<div id="result" class="mt-6 text-lg font-semibold text-center"></div>
+			<div id="certificateSection" class="mt-6 hidden text-center">
+				<p class="text-green-600 font-bold mb-4">
+					¡Felicidades! Has aprobado el curso.
+				</p>
+				<button
+					onclick="generateCertificate()"
+					class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700"
+				>
+					Descargar Certificado
+				</button>
+			</div>
+		</div>
+
+		<script>
+			function calculateScore() {
+				const correctAnswers = document.querySelectorAll(
+					'input[value="correct"]:checked'
+				);
+				const totalQuestions = document.querySelectorAll(".question").length;
+				const score = (correctAnswers.length / totalQuestions) * 100;
+
+				const resultDiv = document.getElementById("result");
+				const certificateSection =
+					document.getElementById("certificateSection");
+
+				if (score >= 80) {
+					resultDiv.textContent = `Tu calificación es: ${score.toFixed(
+						2
+					)}%. ¡Has aprobado!`;
+					resultDiv.style.color = "green";
+					certificateSection.style.display = "block";
+				} else {
+					resultDiv.textContent = `Tu calificación es: ${score.toFixed(
+						2
+					)}%. No has aprobado.`;
+					resultDiv.style.color = "red";
+					certificateSection.style.display = "none";
+				}
+			}
+
+			function generateCertificate() {
+				const certificateContent = `Certificado de Aprobación\n\nFelicidades, has completado con éxito el curso "Tipos de Datos en la Programación".`;
+				const blob = new Blob([certificateContent], { type: "text/plain" });
+				const url = URL.createObjectURL(blob);
+
+				const link = document.createElement("a");
+				link.href = url;
+				link.download = "Certificado_Tipos_de_Datos.txt";
+				link.click();
+
+				URL.revokeObjectURL(url);
+			}
+		</script>
+	</body>
+</html>

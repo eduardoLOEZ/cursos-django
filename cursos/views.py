@@ -6,12 +6,10 @@ def listar_cursos(request):
     return render(request, 'listar_cursos.html', {'cursos': cursos})
 
 
-
-
-
 def detalle_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
-    is_purchased = curso in request.user.cursos_comprados.all()
+    is_purchased = hasattr(request.user, 'cursos_comprados') and curso in request.user.cursos_comprados.all()
+
     
     # Transformar URL al formato embebible si es necesario
     if curso.enlace_video.startswith("https://www.youtube.com/watch?v="):

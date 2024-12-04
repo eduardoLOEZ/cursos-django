@@ -89,6 +89,15 @@
 					>
 					</iframe>
 				</div>
+				<!-- Botón para realizar cuestionario -->
+				<div class="mt-8">
+					<a
+						href="{% url 'cuestionarios:mostrar_cuestionario' curso.id %}"
+						class="bg-blue-600 text-white px-6 py-3 rounded font-bold hover:bg-blue-700 inline-block"
+					>
+						Realizar Cuestionario
+					</a>
+				</div>
 				{% else %}
 				<!-- Mensaje para cursos no comprados -->
 				<p class="text-red-600 font-bold mb-4">

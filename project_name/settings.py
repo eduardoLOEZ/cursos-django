@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     "users",
     "cursos",
     'stripe_payments',
+    'cloudinary',
+    'cloudinary_storage',
+     'cuestionarios',
 
 ]
 
